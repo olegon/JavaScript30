@@ -64,34 +64,35 @@
       top: 50%;
 
       transform-origin: 100% 50%;
+      animation: pointer-animation;
+      animation-timing-function: linear;
+      animation-iteration-count: infinite;
+    }
+
+    .hand.second-hand {
+      animation-duration: 60s;
+    }
+
+    .hand.min-hand {
+      animation-duration: 3600s;
+    }
+
+    .hand.hour-hand {
+      animation-duration: 86400s;
+    }
+
+    @keyframes pointer-animation {
+      0% {
+        transform: rotateZ(0deg);
+      }
+
+      100% {
+        transform: rotateZ(360deg);
+      }
     }
   </style>
 
   <script>
-    const pointers = [...document.querySelectorAll('.hand')];
-    const hourPointer = document.querySelector('.hand.hour-hand');
-    const minutePointer = document.querySelector('.hand.min-hand');
-    const secondPointer = document.querySelector('.hand.second-hand');
-
-    function updateClock() {
-        const now = new Date();
-
-        const [ hour, minute, second ] = [ now.getHours(), now.getMinutes(), now.getSeconds() ];
-
-        const hourDeg = hour / 12 * 360 + 90;
-        const minuteDeg = minute / 60 * 360 + 90;
-        const secondDeg = second / 60 * 360 + 90;
-
-        hourPointer.style.transform = `rotate(${hourDeg}deg)`;
-        minutePointer.style.transform = `rotate(${minuteDeg}deg)`;
-        secondPointer.style.transform = `rotate(${secondDeg}deg)`;
-    }
-
-    updateClock();
-
-    pointers.forEach(pointer => pointer.style.transition = 'all 500ms cubic-bezier(0.61, 0.01, 0.34, 1.01)');
-
-    setInterval(updateClock, 1000);
   </script>
 </body>
 
